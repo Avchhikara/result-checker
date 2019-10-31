@@ -7,6 +7,9 @@ const path = require("path");
 const app = new Koa();
 const router = new Router();
 
+// Now, handling other parts
+const parse = require("./parse/index");
+
 // Adding the views middleware
 app.use(views(path.join(__dirname, "views"), { extension: "html" }));
 
@@ -24,4 +27,16 @@ router.get("/", async ctx => {
   await ctx.render("hello");
 });
 
+router.get("/get", async ctx => {
+  const data = await parse.html(ctx);
+  ctx.res.end(data);
+});
+
 app.listen(3000);
+
+/*
+    While uploading, don't forget to modify as
+    NODE_ENV = PRODUCTION 
+
+
+*/
