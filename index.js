@@ -32,7 +32,7 @@ router.get("/get", async ctx => {
   ctx.body = data;
 });
 
-app.listen(3000);
+app.listen(3030);
 
 /*
     While uploading, don't forget to modify as
