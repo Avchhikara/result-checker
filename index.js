@@ -24,7 +24,7 @@ app.use(router.routes()).use(router.allowedMethods());
 // });
 
 router.get("/", async ctx => {
-  await ctx.render("hello");
+  await ctx.render("index");
 });
 
 router.get("/get", async ctx => {
