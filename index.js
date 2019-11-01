@@ -31,7 +31,7 @@ router.get("/", async ctx => {
 
 router.get("/get", async ctx => {
   const data = await parse.html(ctx);
-  ctx.res.end(data);
+  ctx.body = data;
 });
 
 app.listen(port || 3000);
