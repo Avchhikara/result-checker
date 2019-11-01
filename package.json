@@ -6,8 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
-    "start": "node index.js NODE_ENV=production && uglify",
-    "uglify": "uglifyjs --compress /views"
+    "start": "node index.js NODE_ENV=production"
   },
   "repository": {
     "type": "git",
@@ -22,11 +21,11 @@
   "homepage": "https://github.com/Avchhikara/result-checker#readme",
   "dependencies": {
     "axios": "^0.19.0",
+    "html-minifier": "^4.0.0",
     "koa": "^2.11.0",
     "koa-router": "^7.4.0",
     "koa-views": "^6.2.1",
-    "node-html-parser": "^1.1.16",
-    "uglify-js": "^3.6.6"
+    "node-html-parser": "^1.1.16"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"

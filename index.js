@@ -26,7 +26,7 @@ app.use(router.routes()).use(router.allowedMethods());
 // });
 
 router.get("/", async ctx => {
-  await ctx.render("index");
+  await ctx.render("index.min");
 });
 
 router.get("/get", async ctx => {
@@ -34,7 +34,7 @@ router.get("/get", async ctx => {
   ctx.body = data;
 });
 
-app.listen(port || 3000);
+app.listen(port || 3002);
 
 /*
     While uploading, don't forget to modify as
