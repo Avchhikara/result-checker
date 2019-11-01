@@ -9,9 +9,9 @@ const parseHTML = async url => {
   const root = await HTMLparser.parse(htmlString);
 
   const tr = root.querySelectorAll("tr");
-  for (let row of tr) {
-    console.log("Child Nodes", row.childNodes.length);
-  }
+  // for (let row of tr) {
+  //   console.log("Child Nodes", row.childNodes.length);
+  // }
 
   return htmlString;
 };

@@ -7,6 +7,8 @@ const path = require("path");
 const app = new Koa();
 const router = new Router();
 
+const port = process.env.PORT;
+
 // Now, handling other parts
 const parse = require("./parse/index");
 
@@ -32,7 +34,7 @@ router.get("/get", async ctx => {
   ctx.body = data;
 });
 
-app.listen(3030);
+app.listen(port || 3002);
 
 /*
     While uploading, don't forget to modify as

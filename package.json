@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm run minify & nodemon index.js",
-    "minify": "html-minifier --collapse-whitespace --remove-tag-whitespace --use-short-doctype views/index.html -o views/index.min.html"
+    "minify": "html-minifier --collapse-whitespace --remove-tag-whitespace --use-short-doctype views/index.html -o views/index.min.html",
+    "start": "npm run minify & node index.js"
   },
   "repository": {
     "type": "git",

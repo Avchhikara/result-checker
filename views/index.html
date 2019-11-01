@@ -54,18 +54,17 @@
               <div class="form-group row">
                 <label for="sem" class="col-sm-3 col-form-label">Sem</label>
                 <div class="col-sm-9">
-                  <select class="custom-select" id="sem">
-                    <option selected value="0"
+                  <select class="custom-select" id="sem"
+                    ><option selected value="0"
                       >Select your current Semester</option
-                    >
-                    <option value="1">1st</option>
-                    <option value="2">2nd</option>
-                    <option value="3">3rd</option>
-                    <option value="1">4th</option>
-                    <option value="2">5th</option>
-                    <option value="3">6th</option>
-                    <option value="1">7th</option>
-                    <option value="2">8th</option>
+                    ><option value="1">1st</option
+                    ><option value="2">2nd</option
+                    ><option value="3">3rd</option
+                    ><option value="1">4th</option
+                    ><option value="2">5th</option
+                    ><option value="3">6th</option
+                    ><option value="1">7th</option
+                    ><option value="2">8th</option>
                   </select>
                 </div>
               </div>
@@ -74,8 +73,8 @@
                   >Branch</label
                 >
                 <div class="col-sm-9">
-                  <select class="custom-select" id="branch">
-                    <option selected value="0">Select your branch</option>
+                  <select class="custom-select" id="branch"
+                    ><option selected value="0">Select your branch</option>
                   </select>
                 </div>
               </div>
@@ -97,26 +96,20 @@
     </div>
   </body>
   <script>
-    // Now, making page dynamic to respond to errors
     const url = location.search.split("=");
     const message = url[1];
     const message_type = url[0].includes("error") ? "danger" : "success";
     const message_element = document.querySelector("#message");
-
-    showMessage(decodeURI(message), message_type); // Calling the function to show the message
-
-    // Here, some simple commands
+    showMessage(message && decodeURI(message), message_type);
     const form = document.querySelector("form");
     const button = document.querySelector("button");
     const name = document.querySelector("#name");
     const email = document.querySelector("#email");
     const sem = document.querySelector("#sem");
     const branch = document.querySelector("#branch");
-
     form.addEventListener("submit", formsubmit);
     function formsubmit(e) {
       e.preventDefault();
-      // Now, doing the validation of the data
       const validate_result = validate();
       if (validate_result.status) {
         console.log("All the values are provided", sem.value, branch.value);
@@ -127,8 +120,6 @@
           `?error=${validate_result.message}`;
       }
     }
-
-    // This function is for the simple validation
     function validate() {
       let message = "All the values are validated";
       let status = true;
@@ -147,8 +138,6 @@
       }
       return { message, status };
     }
-
-    // This function shows message to user
     function showMessage(message, type) {
       if (message) {
         const alert = document.createElement("div");
