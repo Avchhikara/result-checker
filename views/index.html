@@ -103,7 +103,7 @@
     const message_type = url[0].includes("error") ? "danger" : "success";
     const message_element = document.querySelector("#message");
 
-    showMessage(decodeURI(message), message_type); // Calling the function to show the message
+    showMessage(message && decodeURI(message), message_type); // Calling the function to show the message
 
     // Here, some simple commands
     const form = document.querySelector("form");
