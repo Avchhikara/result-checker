@@ -31,7 +31,7 @@ app.use(router.routes()).use(router.allowedMethods());
 // });
 
 router.get("/", async ctx => {
-  await ctx.render("index");
+  await ctx.render("index.min");
 });
 
 router.get("/get", async ctx => {
