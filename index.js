@@ -1,7 +1,7 @@
 const Koa = require("koa");
 const views = require("koa-views");
 const Router = require("koa-router");
-var bodyParser = require("koa-bodyparser");
+const koaBody = require("koa-body");
 
 const path = require("path");
 
@@ -18,7 +18,7 @@ const add = require("./add/index");
 app.use(views(path.join(__dirname, "views"), { extension: "html" }));
 
 // Adding the body parser
-app.use(bodyParser());
+app.use(koaBody());
 
 // Adding the router
 app.use(router.routes()).use(router.allowedMethods());
