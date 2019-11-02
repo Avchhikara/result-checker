@@ -1,6 +1,7 @@
 const Koa = require("koa");
 const views = require("koa-views");
 const Router = require("koa-router");
+var bodyParser = require("koa-bodyparser");
 
 const path = require("path");
 
@@ -11,9 +12,13 @@ const port = process.env.PORT;
 
 // Now, handling other parts
 const parse = require("./parse/index");
+const add = require("./add/index");
 
 // Adding the views middleware
 app.use(views(path.join(__dirname, "views"), { extension: "html" }));
+
+// Adding the body parser
+app.use(bodyParser());
 
 // Adding the router
 app.use(router.routes()).use(router.allowedMethods());
@@ -26,12 +31,16 @@ app.use(router.routes()).use(router.allowedMethods());
 // });
 
 router.get("/", async ctx => {
-  await ctx.render("index.min");
+  await ctx.render("index");
 });
 
 router.get("/get", async ctx => {
   const data = await parse.html(ctx);
   ctx.body = data;
+});
+
+router.post("/add", async ctx => {
+  await add(ctx);
 });
 
 app.listen(port || 3002);

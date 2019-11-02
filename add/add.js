@@ -1,7 +1,12 @@
-const handleAdd = async ctx => {
-  const { req, res } = ctx;
+const client = require("./../add/index");
 
-  res.end("ehlloo");
+const handleAdd = async ctx => {
+  // ctx.body = "hello";
+  // res.end("ehlloo");
+  // await client()
+
+  console.log(ctx.request.body, ctx.request);
+  ctx.body = "done";
 };
 
 module.exports = {

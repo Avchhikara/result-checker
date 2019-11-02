@@ -95,7 +95,10 @@
       </div>
     </div>
   </body>
-  <script>
+  <script defer>
+    // Adding event listener to dom
+    document.addEventListener("DOMContentLoaded", getBranch);
+
     const url = location.search.split("=");
     const message = url[1];
     const message_type = url[0].includes("error") ? "danger" : "success";
@@ -111,8 +114,21 @@
     function formsubmit(e) {
       e.preventDefault();
       const validate_result = validate();
-      if (validate_result.status) {
-        console.log("All the values are provided", sem.value, branch.value);
+      if (true || validate_result.status) {
+        // console.log("All the values are provided", sem.value, branch.value);
+        fetch("http://localhost:3002/add", {
+          method: "POST",
+          mode: "no-cors",
+          body: {
+            name: name.value,
+            email: email.value,
+            sem: sem.value,
+            branch: branch.value
+          },
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
       } else {
         location.href =
           location.origin +
@@ -120,6 +136,7 @@
           `?error=${validate_result.message}`;
       }
     }
+
     function validate() {
       let message = "All the values are validated";
       let status = true;
@@ -138,6 +155,23 @@
       }
       return { message, status };
     }
+
+    function getBranch() {
+      // let root = {};
+      // const request = fetch("https://www.dcrustedp.in/show_chart.php", {
+      //   mode: "no-cors",
+      //   method: "GET"
+      // })
+      //   .then(response => response.json())
+      //   .then(data => console.log(data))
+      //   .catch(err => console.log("Error ->", err.message));
+      // don't forget to take care of this function, it will fetch the different branches
+    }
+
+    `
+      This is just to take care of messages
+    `;
+
     function showMessage(message, type) {
       if (message) {
         const alert = document.createElement("div");
