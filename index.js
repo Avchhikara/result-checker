@@ -44,10 +44,3 @@ router.post("/add", async ctx => {
 });
 
 app.listen(port || 3002);
-
-/*
-    While uploading, don't forget to modify as
-    NODE_ENV = PRODUCTION 
-
-
-*/
