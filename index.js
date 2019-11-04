@@ -60,3 +60,5 @@ app.listen(port || 3002);
 
 
 */
+
+console.log(process.env.emailer);

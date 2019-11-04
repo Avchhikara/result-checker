@@ -1,5 +1,5 @@
 const client = require("./../db/index").client;
-const error = require("./../utils/errors");
+const mail = require("./../utils/send-mail");
 const logger = require("./../utils/error-logger");
 const Joi = require("@hapi/joi");
 const constants = require("./../utils/constants.js");
@@ -35,8 +35,17 @@ const handleAdd = async ctx => {
       // console.log(response);
       ctx.body = {
         status: 200,
-        message: "Entry added successfully"
+        message:
+          "Entry added successfully, you will recieve a confirmation email shortly!!"
       };
+      // Sending the email
+      mail(
+        email,
+        "no-repyl@result-notif.herokuapp.com",
+        "Admin",
+        "Subscription Confirmation to result notifications",
+        constants.templates.subscribed
+      );
     } else {
       // console.log(validation.error);
       // ctx.body = validation.error;
