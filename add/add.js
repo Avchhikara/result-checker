@@ -1,10 +1,13 @@
-const client = require("./../db/index");
+const client = require("./../db/index").client;
 const error = require("./../utils/errors");
+const logger = require("./../utils/error-logger");
 const Joi = require("@hapi/joi");
+const constants = require("./../utils/constants.js");
 
 const handleAdd = async ctx => {
   try {
-    const { name, email, sem, branch } = ctx.request.body;
+    const { name, email, sem, branch } = JSON.parse(ctx.request.body);
+    // console.log(name, email, sem, branch);
     const schema = Joi.object({
       name: Joi.string()
         .min(3)
@@ -24,26 +27,33 @@ const handleAdd = async ctx => {
     });
     if (!validation.error) {
       // Now, just saving the data
+
       const query =
         "INSERT into subscribers(name, email, sem, branch) values ($1, $2, $3, $4)";
       const params = [name, email, sem, branch];
       const response = await client.query(query, params);
-      console.log(response);
-      ctx.body = "success";
+      // console.log(response);
+      ctx.body = {
+        status: 200,
+        message: "Entry added successfully"
+      };
     } else {
       // console.log(validation.error);
       // ctx.body = validation.error;
-
-      ctx.body = {
-        status: 400,
-        message: validation.error.message
-      };
+      ctx.redirect(constants.baseURL + "?error=" + validation.error.message);
+      // ctx.body = {
+      //   status: 400,
+      //   message: validation.error.message
+      // };
     }
   } catch (err) {
     message = "something went wrong";
+
     if (err.code && err.code === "23505") {
       message = `Given email is already registered`;
     }
+
+    logger(err.message || message);
 
     ctx.body = {
       status: 404,

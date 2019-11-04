@@ -13,6 +13,7 @@ const port = process.env.PORT;
 // Now, handling other parts
 const parse = require("./parse/index");
 const add = require("./add/index");
+const db = require("./db");
 
 // Adding the views middleware
 app.use(views(path.join(__dirname, "views"), { extension: "html" }));
@@ -35,12 +36,20 @@ router.get("/", async ctx => {
 });
 
 router.get("/get", async ctx => {
-  const data = await parse.html(ctx);
+  const data = await parse.get("https://www.dcrustedp.in/show_chart.php");
   ctx.body = data;
 });
 
 router.post("/add", async ctx => {
   await add(ctx);
+});
+
+router.get("/load", async ctx => {
+  await db.loadBranches(ctx);
+});
+
+router.get("/branches", async ctx => {
+  await db.getBranches(ctx);
 });
 
 app.listen(port || 3002);

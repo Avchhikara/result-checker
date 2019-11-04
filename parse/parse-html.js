@@ -3,28 +3,25 @@ const logger = require("./../utils/error-logger");
 
 const get = require("./get-html");
 
-const parseHTML = async url => {
+const parseHTML = async htmlString => {
   try {
     // First, getting the html
+    if (!htmlString) {
+      return {
+        status: 404,
+        message: "Please provide the html string"
+      };
+    }
 
-    const htmlString = await get.html(
-      "https://www.dcrustedp.in/show_chart.php"
-    );
     const root = await HTMLparser.parse(htmlString);
 
-    const tr = root.querySelectorAll("tr");
-    // for (let row of tr) {
-    //   console.log("Child Nodes", row.childNodes.length);
-    // }
-
-    return htmlString;
+    return root;
   } catch (err) {
     logger(err.message);
-    return `
-    <h4>The Result page of University is not working 🤔</h4>
-    <p>Get back later</p>
-    <p>Something serious is cooking like result 😅</p>
-    `;
+    return {
+      status: 400,
+      message: "Something went wrong"
+    };
   }
 };
 

@@ -60,11 +60,11 @@
                     ><option value="1">1st</option
                     ><option value="2">2nd</option
                     ><option value="3">3rd</option
-                    ><option value="1">4th</option
-                    ><option value="2">5th</option
-                    ><option value="3">6th</option
-                    ><option value="1">7th</option
-                    ><option value="2">8th</option>
+                    ><option value="4">4th</option
+                    ><option value="5">5th</option
+                    ><option value="6">6th</option
+                    ><option value="7">7th</option
+                    ><option value="8">8th</option>
                   </select>
                 </div>
               </div>
@@ -111,29 +111,41 @@
     const sem = document.querySelector("#sem");
     const branch = document.querySelector("#branch");
     form.addEventListener("submit", formsubmit);
+
     function formsubmit(e) {
       e.preventDefault();
       const validate_result = validate();
-      if (true || validate_result.status) {
-        // console.log("All the values are provided", sem.value, branch.value);
+      if (validate_result.status) {
+        const url = "https://result-notif.herokuapp.com/add";
         fetch("http://localhost:3002/add", {
           method: "POST",
           mode: "no-cors",
-          body: {
+          body: JSON.stringify({
             name: name.value,
             email: email.value,
             sem: sem.value,
             branch: branch.value
-          },
+          }),
           headers: {
             "Content-Type": "application/json"
           }
-        });
+        })
+          .then(res => res.json())
+          .then(({ status, message }) => {
+            if (status === 200) {
+              showMessage(message, "success");
+            } else {
+              showMessage(message, "danger");
+            }
+          })
+          .catch(err =>
+            showMessage(
+              "Something went wrong, please try again later",
+              "danger"
+            )
+          );
       } else {
-        location.href =
-          location.origin +
-          location.pathname +
-          `?error=${validate_result.message}`;
+        showMessage(validate_result.message, "danger");
       }
     }
 
@@ -157,15 +169,31 @@
     }
 
     function getBranch() {
-      // let root = {};
-      // const request = fetch("https://www.dcrustedp.in/show_chart.php", {
-      //   mode: "no-cors",
-      //   method: "GET"
-      // })
-      //   .then(response => response.json())
-      //   .then(data => console.log(data))
-      //   .catch(err => console.log("Error ->", err.message));
-      // don't forget to take care of this function, it will fetch the different branches
+      fetch("http://localhost:3002/branches", {
+        method: "GET",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(res => res.json())
+        .then(data => setBranches(data));
+    }
+
+    function setBranches(res) {
+      if (res.status === 200) {
+        const select = document.querySelector("#branch");
+        for (let branch of res.data) {
+          const option = document.createElement("option");
+          option.value = branch.b_id;
+          option.textContent = branch.name;
+          select.appendChild(option);
+        }
+      } else {
+        alert(
+          "Error in getting branches data, please contact avnishchhikara@outlook.com for prompt response"
+        );
+      }
     }
 
     `
