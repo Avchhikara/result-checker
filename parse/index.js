@@ -1,5 +1,7 @@
 const html = require("./parse-html");
+const get = require("./get-html");
 
 module.exports = {
-  html: html.parseHTML
+  parse: html.parseHTML,
+  get: get.html
 };

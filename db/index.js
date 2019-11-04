@@ -1,2 +1,8 @@
 const client = require("./connection");
-module.exports = client;
+const loadBranches = require("./load");
+const getBranches = require("./get-branch");
+module.exports = {
+  client,
+  loadBranches,
+  getBranches
+};
