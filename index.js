@@ -52,6 +52,12 @@ router.get("/branches", async ctx => {
   await db.getBranches(ctx);
 });
 
+// This is temporary
+router.get("/parse", async ctx => {
+  const data = await parse.handler();
+  ctx.body = data;
+});
+
 app.listen(port || 3002);
 
 /*
