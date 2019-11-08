@@ -6,7 +6,7 @@ const unsafe = axios.create({
   httpsAgent: new https.Agent({
     rejectUnauthorized: false
   }),
-  timeout: 5000
+  timeout: 10000
 });
 
 const instance = axios.create({

@@ -9,8 +9,9 @@ const handler = async (url = "https://www.dcrustedp.in/show_chart.php") => {
     const htmlString = await get(url);
     const root = await parse(htmlString);
     const doc = await structurize(root);
-    db.result(doc);
+    const result_out = await db.result(doc);
     // Now, storing the values in db
+    console.log(result_out);
 
     return doc;
   } catch (err) {
