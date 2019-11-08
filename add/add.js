@@ -41,7 +41,7 @@ const handleAdd = async ctx => {
       // Sending the email
       mail({
         to: email,
-        from: "no-repyl@result-notif.herokuapp.com",
+        from: "no-reply@result-notif.herokuapp.com",
         fromName: "Admin",
         subject: "Subscription Confirmation to result notifications",
         html: constants.templates.subscribed
