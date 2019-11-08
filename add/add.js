@@ -39,13 +39,13 @@ const handleAdd = async ctx => {
           "Entry added successfully, you will recieve a confirmation email shortly!!"
       };
       // Sending the email
-      mail(
-        email,
-        "no-repyl@result-notif.herokuapp.com",
-        "Admin",
-        "Subscription Confirmation to result notifications",
-        constants.templates.subscribed
-      );
+      mail({
+        to: email,
+        from: "no-repyl@result-notif.herokuapp.com",
+        fromName: "Admin",
+        subject: "Subscription Confirmation to result notifications",
+        html: constants.templates.subscribed
+      });
     } else {
       // console.log(validation.error);
       // ctx.body = validation.error;
@@ -56,7 +56,8 @@ const handleAdd = async ctx => {
       // };
     }
   } catch (err) {
-    message = "something went wrong";
+    message =
+      "something went wrong, you might check the values you have entered";
 
     if (err.code && err.code === "23505") {
       message = `Given email is already registered`;

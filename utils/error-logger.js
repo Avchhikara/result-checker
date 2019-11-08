@@ -11,7 +11,7 @@ const logger = (err = "", priority) => {
       subject: "Error Logger | Notification 🔌",
       html: constants.templates.error.replace("errMessageString", err)
     };
-    mail(to)
+    mail({ ...to })
       .then(data => console.log("mail is sent"))
       .catch(err => console.log("Error in sending mail"));
 

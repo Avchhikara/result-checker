@@ -21,9 +21,9 @@ const handleResult = async doc => {
           if (entry.out === false && out_res)
             output.push({
               branch,
-              sem: parseInt(sem)
+              sem: parseInt(sem),
+              date: entry.outdate
             });
-
           //   Now, running the update
           await update(parseInt(sem), branch, out_res);
         } else {
