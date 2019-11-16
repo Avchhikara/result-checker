@@ -15,6 +15,11 @@ const parse = require("./parse/index");
 const add = require("./add/index");
 const db = require("./db");
 
+// Parse handler cron-job
+const cron = require("./utils/cron-parse-handler");
+// Just simply running it
+cron.start();
+
 // Adding the views middleware
 app.use(views(path.join(__dirname, "views"), { extension: "html" }));
 
