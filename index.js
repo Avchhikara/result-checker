@@ -58,6 +58,12 @@ router.get("/parse", async ctx => {
   ctx.body = data;
 });
 
+// This is when the wrong notification is sent the to user, this link will send me an email that the wrong notification is sent to the user
+router.get("/wrong", async ctx => {
+  ctx.body =
+    "Your complaint is duly noted and we will try our best not to repeat this again. Sorry for the inconvenience caused.";
+});
+
 app.listen(port || 3002);
 
 /*

@@ -29,8 +29,8 @@ const handleAdd = async ctx => {
       // Now, just saving the data
 
       const query =
-        "INSERT into subscribers(name, email, sem, branch) values ($1, $2, $3, $4)";
-      const params = [name, email, sem, branch];
+        "INSERT into subscribers(name, email, sem, branch, admission_year) values ($1, $2, $3, $4, $5)";
+      const params = [name, email, sem, branch, getYear(parseInt(sem))];
       const response = await client.query(query, params);
       // console.log(response);
       ctx.body = {
@@ -71,6 +71,12 @@ const handleAdd = async ctx => {
     };
   }
 };
+
+function getYear(sem = 0) {
+  let year = new Date();
+  year = year.getFullYear() - Math.floor(sem / 2);
+  return year;
+}
 
 module.exports = {
   handleAdd

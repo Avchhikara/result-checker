@@ -14,11 +14,11 @@ const getSubs = async sem_branch => {
 
   //   console.log(sem_branch);
 
-  const query = `SELECT * from subscribers where sem=$1 and branch=$2`;
+  const query = `SELECT * from subscribers where admission_year=$1 and branch=$2`;
 
   let out = {};
   for (let i of sem_branch) {
-    const data = await client.query(query, [i.sem, i.b_id]);
+    const data = await client.query(query, [i.year, i.b_id]);
     parseSem(data.rows, out, i.sem);
   }
 

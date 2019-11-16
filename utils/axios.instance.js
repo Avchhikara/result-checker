@@ -14,7 +14,7 @@ const instance = axios.create({
 });
 
 const emailer = axios.create({
-  timeout: 5000,
+  timeout: 10000,
   baseURL: constants.emailer,
   headers: { key: process.env.emailer || require("./../private").emailer }
 });
