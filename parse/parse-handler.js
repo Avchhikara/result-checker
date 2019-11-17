@@ -38,6 +38,7 @@ const handler = async (url = "https://www.dcrustedp.in/show_chart.php") => {
           });
         }
       }
+      console.log("Result of ", subs);
     } else {
       // Do nothing
       console.log("No new result");
