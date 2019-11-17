@@ -1,12 +1,8 @@
 const { Client } = require("pg");
 
 const client = new Client({
-  host: "localhost",
-  port: 5432,
-  user: "avnish",
-  password: "",
-  database: "result-checker",
-  ssl: false
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
 });
 
 client.connect(err => {
