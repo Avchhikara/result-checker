@@ -184,7 +184,6 @@
     }
 
     function setBranches(res) {
-      console.log(res);
       if (res.status === 200) {
         const select = document.querySelector("#branch");
         for (let branch of res.data) {
