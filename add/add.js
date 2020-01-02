@@ -41,22 +41,22 @@ const handleAdd = async ctx => {
           "Entry added successfully, you will recieve a confirmation email shortly!!"
       };
       // Sending the email
-      // mail({
-      //   to: email,
-      //   from: "no-reply@result-notif.herokuapp.com",
-      //   fromName: "Admin",
-      //   subject: "Subscription Confirmation to result notifications",
-      //   html: constants.templates.subscribed
-      // });
+      mail({
+        to: email,
+        from: "no-reply@result-notif.herokuapp.com",
+        fromName: "Admin",
+        subject: "Subscription Confirmation to result notifications",
+        html: constants.templates.subscribed
+      });
 
-      // // Also, sending myself an email that someone has registered
-      // mail({
-      //   to: "avnishchhikara@outlook.com",
-      //   from: "no-reply@result-notif.herokuapp.com",
-      //   fromName: "Admin",
-      //   subject: "We got new user 🥳",
-      //   html: `<div>Hello me, <br> We have got a new user name: <strong>${name}</strong> of <strong>${admission_year}</strong> admission year</div>`
-      // });
+      // Also, sending myself an email that someone has registered
+      mail({
+        to: "avnishchhikara@outlook.com",
+        from: "no-reply@result-notif.herokuapp.com",
+        fromName: "Admin",
+        subject: "We got new user 🥳",
+        html: `<div>Hello me, <br> We have got a new user name: <strong>${name}</strong> of <strong>${admission_year}</strong> admission year</div>`
+      });
     } else {
       // console.log(validation.error);
       // ctx.body = validation.error;

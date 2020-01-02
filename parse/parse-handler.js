@@ -7,7 +7,7 @@ const getYear = require("./../utils/getYear").getYearResultSem;
 const mail = require("./../utils/send-mail");
 const template = require("./../utils/constants").templates;
 
-const handler = async (url = "http://127.0.0.1:5500/test.html") => {
+const handler = async (url = "https://www.dcrustedp.in/show_chart.php") => {
   try {
     const htmlString = await get(url);
     const root = await parse(htmlString);
@@ -40,7 +40,7 @@ const handler = async (url = "http://127.0.0.1:5500/test.html") => {
         }
       }
       console.log("Result of ", subs);
-      return subs;
+      // return subs;
     } else {
       // Do nothing
       console.log("No new result");

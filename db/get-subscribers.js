@@ -17,7 +17,7 @@ const getSubs = async sem_branch => {
   let out = {};
   for (let i of sem_branch) {
     const data = await client.query(query, [i.year, i.b_id]);
-    console.log(data.rows);
+    // console.log(data.rows);
     parseSem(data.rows, out, i.sem);
   }
 

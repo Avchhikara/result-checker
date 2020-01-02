@@ -18,7 +18,7 @@ const db = require("./db");
 // Parse handler cron-job
 const cron = require("./utils/cron-parse-handler");
 // Just simply running it
-// cron.start();
+cron.start();
 
 // Adding the views middleware
 app.use(views(path.join(__dirname, "views"), { extension: "html" }));
@@ -58,10 +58,10 @@ router.get("/branches", async ctx => {
 });
 
 // This is temporary
-router.get("/parse", async ctx => {
-  const data = await parse.handler();
-  ctx.body = data;
-});
+// router.get("/parse", async ctx => {
+//   const data = await parse.handler();
+//   ctx.body = data;
+// });
 
 // This is when the wrong notification is sent the to user, this link will send me an email that the wrong notification is sent to the user
 router.get("/wrong", async ctx => {
