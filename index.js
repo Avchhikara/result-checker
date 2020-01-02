@@ -15,6 +15,11 @@ const parse = require("./parse/index");
 const add = require("./add/index");
 const db = require("./db");
 
+// Parse handler cron-job
+const cron = require("./utils/cron-parse-handler");
+// Just simply running it
+cron.start();
+
 // Adding the views middleware
 app.use(views(path.join(__dirname, "views"), { extension: "html" }));
 
@@ -50,6 +55,18 @@ router.get("/load", async ctx => {
 
 router.get("/branches", async ctx => {
   await db.getBranches(ctx);
+});
+
+// This is temporary
+router.get("/parse", async ctx => {
+  const data = await parse.handler();
+  ctx.body = data;
+});
+
+// This is when the wrong notification is sent the to user, this link will send me an email that the wrong notification is sent to the user
+router.get("/wrong", async ctx => {
+  ctx.body =
+    "Your complaint is duly noted and we will try our best not to repeat this again. Sorry for the inconvenience caused.";
 });
 
 app.listen(port || 3002);
