@@ -56,19 +56,18 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="sem" class="col-sm-3 col-form-label">Sem</label>
+                <label for="sem" class="col-sm-3 col-form-label"
+                  >Admission Year</label
+                >
                 <div class="col-sm-9">
                   <select class="custom-select" id="sem"
                     ><option selected value="0"
-                      >Select your current Semester</option
-                    ><option value="1">1st</option
-                    ><option value="2">2nd</option
-                    ><option value="3">3rd</option
-                    ><option value="4">4th</option
-                    ><option value="5">5th</option
-                    ><option value="6">6th</option
-                    ><option value="7">7th</option
-                    ><option value="8">8th</option>
+                      >Select your admission year</option
+                    ><option value="2016">2016</option
+                    ><option value="2017">2017</option
+                    ><option value="2018">2018</option
+                    ><option value="2019">2019</option
+                    ><option value="2020">2020</option>
                   </select>
                 </div>
               </div>
@@ -120,13 +119,13 @@
       e.preventDefault();
       const validate_result = validate();
       if (validate_result.status) {
-        fetch("http://locahost:3002/add", {
+        fetch("http://localhost:3002/add", {
           method: "POST",
           mode: "no-cors",
           body: JSON.stringify({
             name: name.value,
             email: email.value,
-            sem: sem.value,
+            admission_year: sem.value,
             branch: branch.value
           }),
           headers: {
@@ -141,12 +140,13 @@
               showMessage(message, "danger");
             }
           })
-          .catch(err =>
+          .catch(err => {
+            console.log(err.message);
             showMessage(
               "Something went wrong, please try again later",
               "danger"
-            )
-          );
+            );
+          });
       } else {
         showMessage(validate_result.message, "danger");
       }

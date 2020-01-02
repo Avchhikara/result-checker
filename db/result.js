@@ -1,3 +1,9 @@
+/*
+This file only gives us the branches whose result is out
+
+PS: It doesn't gives us who should be notified, for that, look into:  parse-handler.js, line 17
+*/
+
 const client = require("./connection");
 const logger = require("./../utils/error-logger");
 

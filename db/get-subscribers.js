@@ -12,13 +12,12 @@ const getSubs = async sem_branch => {
     i["b_id"] = obj_branch[i.branch];
   }
 
-  //   console.log(sem_branch);
-
   const query = `SELECT * from subscribers where admission_year=$1 and branch=$2`;
 
   let out = {};
   for (let i of sem_branch) {
     const data = await client.query(query, [i.year, i.b_id]);
+    console.log(data.rows);
     parseSem(data.rows, out, i.sem);
   }
 

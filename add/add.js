@@ -6,8 +6,10 @@ const constants = require("./../utils/constants.js");
 
 const handleAdd = async ctx => {
   try {
-    const { name, email, sem, branch } = JSON.parse(ctx.request.body);
-    // console.log(name, email, sem, branch);
+    const { name, email, admission_year, branch } = JSON.parse(
+      ctx.request.body
+    );
+
     const schema = Joi.object({
       name: Joi.string()
         .min(3)
@@ -16,21 +18,21 @@ const handleAdd = async ctx => {
       email: Joi.string()
         .email()
         .required(),
-      sem: Joi.string().required(),
+      admission_year: Joi.string().required(),
       branch: Joi.string().required()
     });
     const validation = schema.validate({
       name,
       email,
-      sem,
-      branch
+      branch,
+      admission_year
     });
     if (!validation.error) {
       // Now, just saving the data
 
       const query =
-        "INSERT into subscribers(name, email, sem, branch, admission_year) values ($1, $2, $3, $4, $5)";
-      const params = [name, email, sem, branch, getYear(parseInt(sem))];
+        "INSERT into subscribers(name, email, branch, admission_year) values ($1, $2, $3, $4)";
+      const params = [name, email, branch, admission_year];
       const response = await client.query(query, params);
       // console.log(response);
       ctx.body = {
@@ -39,22 +41,22 @@ const handleAdd = async ctx => {
           "Entry added successfully, you will recieve a confirmation email shortly!!"
       };
       // Sending the email
-      mail({
-        to: email,
-        from: "no-reply@result-notif.herokuapp.com",
-        fromName: "Admin",
-        subject: "Subscription Confirmation to result notifications",
-        html: constants.templates.subscribed
-      });
+      // mail({
+      //   to: email,
+      //   from: "no-reply@result-notif.herokuapp.com",
+      //   fromName: "Admin",
+      //   subject: "Subscription Confirmation to result notifications",
+      //   html: constants.templates.subscribed
+      // });
 
-      // Also, sending myself an email that someone has registered
-      mail({
-        to: "avnishchhikara@outlook.com",
-        from: "no-reply@result-notif.herokuapp.com",
-        fromName: "Admin",
-        subject: "We got new user 🥳",
-        html: `<div>Hello me, <br> We have got a new user name: <strong>${name}</strong> of <strong>${sem}</strong> semester</div>`
-      });
+      // // Also, sending myself an email that someone has registered
+      // mail({
+      //   to: "avnishchhikara@outlook.com",
+      //   from: "no-reply@result-notif.herokuapp.com",
+      //   fromName: "Admin",
+      //   subject: "We got new user 🥳",
+      //   html: `<div>Hello me, <br> We have got a new user name: <strong>${name}</strong> of <strong>${admission_year}</strong> admission year</div>`
+      // });
     } else {
       // console.log(validation.error);
       // ctx.body = validation.error;
@@ -80,12 +82,6 @@ const handleAdd = async ctx => {
     };
   }
 };
-
-function getYear(sem = 0) {
-  let year = new Date();
-  year = year.getFullYear() - Math.floor(sem / 2);
-  return year;
-}
 
 module.exports = {
   handleAdd
