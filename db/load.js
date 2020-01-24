@@ -1,16 +1,16 @@
-const parse = require("./../parse/index.js");
 const client = require("./connection");
 const logger = require("./../utils/error-logger");
 
 const handleLoad = async ctx => {
   //   const html = await parse.html("https://www.dcrustedp.in/show_chart.php");
   try {
+    const parse = require("./../parse/index.js");
     const htmlString = await parse.get(
       "https://www.dcrustedp.in/show_chart.php"
     );
     const root = await parse.parse(htmlString);
     const tr = root.querySelectorAll("tr");
-    //   console.log(tr);
+    // console.log(tr);
     let child = "";
     for (let row of tr) {
       child = row.childNodes;
@@ -29,7 +29,8 @@ const handleLoad = async ctx => {
     };
   } catch (err) {
     logger("branches already exist");
-    ctx.body = { message: "Already exist", status: 400 };
+    console.log(err.message);
+    ctx.body = { message: "Branches already exist", status: 400 };
   }
 };
 
